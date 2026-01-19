@@ -1,0 +1,24 @@
+set(QNX_HOST "$ENV{QNX_HOST}")
+set(QNX_TARGET "$ENV{QNX_TARGET}")
+
+# target config
+set(CMAKE_SYSTEM_NAME QNX)
+set(CMAKE_SYSTEM_VERSION 7.1)
+set(CMAKE_SYSTEM_PROCESSOR aarch64le)
+
+# compiler
+set(CMAKE_C_COMPILER ${QNX_HOST}/usr/bin/ntoaarch64-gcc)
+set(CMAKE_CXX_COMPILER ${QNX_HOST}/usr/bin/ntoaarch64-g++)
+
+# Standard
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# CMake Find
+set(CMAKE_FIND_ROOT_PATH $QNX_TARGET/aarch64le)
+set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY BOTH)
+set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE BOTH)
+
+# Needed for POSIX dependencies
+add_compile_definitions(_QNX_SOURCE)

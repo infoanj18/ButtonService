@@ -1,0 +1,19 @@
+cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
+
+message("-- CMAKE_SYSTEM_NAME:          ${CMAKE_SYSTEM_NAME}")
+message("-- CMAKE_SYSTEM_PROCESSOR:     ${CMAKE_SYSTEM_PROCESSOR}")
+
+set(SERVICE_BINARY_NAME ${PROJECT_NAME})
+add_executable(${SERVICE_BINARY_NAME} ${BUTTON_SERVICE_SOURCES})
+
+target_link_libraries(${SERVICE_BINARY_NAME}
+    PUBLIC
+        ${BUTTON_SERVICE_LIBRARIES}
+)
+
+target_include_directories(${SERVICE_BINARY_NAME}
+    PRIVATE
+        ${BUTTON_SERVICE_HEADERS}
+)
+
+install(TARGETS ${SERVICE_BINARY_NAME})
