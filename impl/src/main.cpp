@@ -17,11 +17,11 @@
 #include "ford/utils/logger.hpp"
 
 int main() {
-    ford::utils::Logger logger("ButtonService");
+    ford::utils::Logger logger("Button-Service");
     
-    LogI(logger, "ButtonService starting...");
+    LogI(logger, "Button-Service starting...");
     LogI(logger, "Hello World");
-    LogI(logger, "ButtonService exiting.");
+    LogI(logger, "Button-Service exiting.");
     
     std::cout << "Hello World" << std::endl;
     return 0;
