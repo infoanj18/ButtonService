@@ -14,15 +14,36 @@
 //
 
 #include <iostream>
+#include <thread>
+#include <chrono>
+#include <atomic>
+#include <csignal>
 #include "ford/utils/logger.hpp"
+
+static std::atomic<bool> running{true};
+
+void signalHandler(int signal) {
+    if (signal == SIGINT || signal == SIGTERM) {
+        running = false;
+    }
+}
 
 int main() {
     ford::utils::Logger logger("Button-Service");
     
-    LogI(logger, "Button-Service starting...");
-    LogI(logger, "Hello World");
-    LogI(logger, "Button-Service exiting.");
+    // Set up signal handlers for graceful shutdown
+    std::signal(SIGINT, signalHandler);
+    std::signal(SIGTERM, signalHandler);
     
+    LogI(logger, "Button-Service starting...");
     std::cout << "Hello World" << std::endl;
+    
+    // Main service loop
+    while (running) {
+        // TODO: Add your service logic here
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
+
+    LogI(logger, "Button-Service exiting.");
     return 0;
 }
